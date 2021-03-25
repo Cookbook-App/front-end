@@ -17,7 +17,7 @@ function Copyright() {
     <Typography variant="body2" color="textSecondary" align="center">
       {'Copyright © '}
       <Link color="inherit" href="https://material-ui.com/">
-        Secret Cookbook
+        <span className='green'>Secret Cookbook</span>
       </Link>{' '}
       {new Date().getFullYear()}
       {'.'}
@@ -85,6 +85,7 @@ export default function SignInSide() {
           </Typography>
           <form className={classes.form} noValidate>
             <TextField
+              onChange={handleChange}
               variant="outlined"
               margin="normal"
               required
@@ -96,6 +97,7 @@ export default function SignInSide() {
               autoFocus
             />
             <TextField
+              onChange={handleChange}
               variant="outlined"
               margin="normal"
               required

@@ -1,4 +1,7 @@
 import React, { useState } from 'react';
+import axios from 'axios';
+import { useHistory } from 'react-router-dom'
+
 import Avatar from '@material-ui/core/Avatar';
 import Button from '@material-ui/core/Button';
 import CssBaseline from '@material-ui/core/CssBaseline';
@@ -11,6 +14,8 @@ import Box from '@material-ui/core/Box';
 import Grid from '@material-ui/core/Grid';
 import Typography from '@material-ui/core/Typography';
 import { makeStyles } from '@material-ui/core/styles';
+
+
 
 function Copyright() {
   return (
@@ -60,11 +65,29 @@ const useStyles = makeStyles((theme) => ({
 
 export default function SignInSide() {
   const [credentials, setCredentials] = useState('')
+  const history = useHistory();
 
   const handleChange = (e) => {
     setCredentials({
       ...credentials,
       [e.target.name]: e.target.value
+    })
+  }
+
+  const onSubmit = (e) => {
+    e.preventDefault();
+    // Call API TO SUBMIT DATA 
+    axios.post('', { email: e.target.value, password: e.target.value })
+    .then(res => {
+      const { token } = res.data;
+      localStorage.setItem('token', token);
+
+      history.push('/');
+      history.go();
+
+    })
+    .catch (error => {
+      console.log(error, 'Houston we have a problem')
     })
   }
 
@@ -83,7 +106,7 @@ export default function SignInSide() {
           <Typography component="h1" variant="h5">
             Login
           </Typography>
-          <form className={classes.form} noValidate>
+          <form className={classes.form} noValidate >
             <TextField
               onChange={handleChange}
               variant="outlined"
@@ -118,6 +141,7 @@ export default function SignInSide() {
               variant="contained"
               color="primary"
               className={classes.submit}
+              onSubmit={onSubmit}
             >
               Sign In
             </Button>

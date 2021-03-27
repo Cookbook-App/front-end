@@ -1,3 +1,5 @@
+import NEW_RECIPE_START from '../actions'
+
 export const initialState = {
     recipes: [],
     newRecipeData: [],
@@ -7,5 +9,15 @@ export const initialState = {
 }
 
 export default function reducer(state = initialState, action) {
-    
+    switch(action.type) {
+        case NEW_RECIPE_START:
+            return {
+                ...state,
+                fetching: true
+            }
+            default:
+                return {
+                    ...state
+                }
+    }
 }

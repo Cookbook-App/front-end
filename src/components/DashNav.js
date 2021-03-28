@@ -18,13 +18,16 @@ export default function HeaderNav(props) {
         <Collapse isOpen={!collapsed} navbar>
           <Nav navbar>
             <NavItem>
-              <NavLink href="/components/">Create New Recipe</NavLink>
+              <NavLink href="/dashboard">Create Recipe</NavLink>
             </NavItem>
             <NavItem>
-              <NavLink href="/components/">My Secret Recipes</NavLink>
+              <NavLink href="/components/">My Recipes</NavLink>
             </NavItem>
             <NavItem>
-              <NavLink href="https://github.com/reactstrap/reactstrap">Logout</NavLink>
+              <NavLink href="/login">Sign Up</NavLink>
+            </NavItem>
+            <NavItem>
+              <NavLink href="/login">Login</NavLink>
             </NavItem>
           </Nav>
         </Collapse>

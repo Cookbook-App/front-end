@@ -8,6 +8,11 @@ export const FETCH_FAILURE = 'FETCH_FAILURE';
 export const ADD_START = 'ADD_START';
 export const EDIT_START = 'EDIT_START';
 
+export const REGISTRATION_START = 'REGISTRATION_START'
+export const REGISTRATION_SUCCESS = 'REGISTRATION_SUCCESS'
+export const REGISTRATION_FAILURE = 'REGISTRATION_FAILURE'
+
+
 const recipeToFilter = []
 
 // Fetching actions
@@ -46,5 +51,19 @@ export const updateRecipe = (id, editRecipe) => dispatch => {
     })
     .catch(err => {
         dispatch({ type: FETCH_FAILURE, payload: err.response })
+    })
+}
+
+
+export const addUser = newUser => dispatch => {
+    dispatch({ type: REGISTRATION_START })
+    axiosWithAuth()
+    .post('/users/register', newUser)
+    .then(res => {
+        localStorage.setItem('token', res.data.token)
+        dispatch({ type: REGISTRATION_SUCCESS, payload: res.data })
+    })
+    .catch(err => {
+        dispatch({ type: REGISTRATION_FAILURE, payload: err.response })
     })
 }

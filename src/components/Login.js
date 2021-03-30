@@ -81,7 +81,7 @@ export default function SignInSide() {
       email: e.target.value,
       password: e.target.value
     } 
-    axios.post('https://localhost:3000/login', data)
+    axios.post('http://localhost:3004/users/register', data)
     .then(res => {
 
       console.log(res.token)

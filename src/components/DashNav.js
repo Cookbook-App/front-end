@@ -2,6 +2,7 @@
 import React, { useState } from 'react'
 import 'bootstrap/dist/css/bootstrap.min.css';
 
+
 import { Collapse, Navbar, NavbarToggler, NavbarBrand, Nav, NavItem, NavLink } from 'reactstrap';
 
 export default function HeaderNav(props) {
@@ -24,10 +25,7 @@ export default function HeaderNav(props) {
               <NavLink href="/components/">My Recipes</NavLink>
             </NavItem>
             <NavItem>
-              <NavLink href="/login">Sign Up</NavLink>
-            </NavItem>
-            <NavItem>
-              <NavLink href="/login">Login</NavLink>
+              <NavLink href="/login">Logout</NavLink>
             </NavItem>
           </Nav>
         </Collapse>

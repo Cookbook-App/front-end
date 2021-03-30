@@ -7,6 +7,24 @@
   pointer-events: none;
 }
 
+.mainbody {
+  padding: 10px;
+  border: 1px solid red;
+}
+
+.saved-recipes {
+  border: 1px solid red;
+  display: flex;
+  justify-content: space-evenly;
+  flex-direction: row;
+}
+
+.signin-greeting {
+  background-color: orange;
+  padding: 5vh;
+  color: whitesmoke;
+}
+
 @media (prefers-reduced-motion: no-preference) {
   .App-logo {
     animation: App-logo-spin infinite 20s linear;

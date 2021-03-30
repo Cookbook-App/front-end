@@ -1,5 +1,6 @@
 import axios from 'axios';
 import axiosWithAuth from '../utils/axiosWithAuth';
+import { logout } from '../utils/service'
 
 export const FETCH_START = 'FETCH_START';
 export const FETCH_SUCCESS = 'FETCH_SUCCESS';
@@ -11,6 +12,10 @@ export const EDIT_START = 'EDIT_START';
 export const REGISTRATION_START = 'REGISTRATION_START'
 export const REGISTRATION_SUCCESS = 'REGISTRATION_SUCCESS'
 export const REGISTRATION_FAILURE = 'REGISTRATION_FAILURE'
+
+export  const LOGIN_START ="LOGIN_START";
+export const LOGIN_SUCCESS = "LOGIN_SUCCESS";
+export const LOGIN_FAILURE = "LOGIN_FAILURE";
 
 
 const recipeToFilter = []
@@ -55,6 +60,7 @@ export const updateRecipe = (id, editRecipe) => dispatch => {
 }
 
 
+
 export const addUser = newUser => dispatch => {
     dispatch({ type: REGISTRATION_START })
     axiosWithAuth()
@@ -65,5 +71,25 @@ export const addUser = newUser => dispatch => {
     })
     .catch(err => {
         dispatch({ type: REGISTRATION_FAILURE, payload: err.response })
+    })
+}
+
+export const login = (email, password) => dispatch => {
+    dispatch({ type: LOGIN_START })
+    return axiosWithAuth()
+    .post('/users/login', {
+        email: email,
+        password: password
+    })
+    .then(res => {
+        localStorage.setItem('token', res.data.token);
+        dispatch({ type: LOGIN_SUCCESS, payload: res.data })
+        return true
+    })
+    .catch(err => {
+        logout(callback => {
+            alert(err)
+        })
+        dispatch({ type: LOGIN_FAILURE, payload: err.data })
     })
 }

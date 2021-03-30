@@ -1,18 +1,24 @@
 import React from "react";
 import Login from "./components/Login";
-import Signup from "./components/SignUp";
-import { Switch, Route } from "react-router-dom";
+import DashNav from "./components/DashNav";
+import Signup from "./components/Signup";
+import Dashboard from "./pages/Dashboard";
+import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
 import { connect } from "react-redux";
 import "./App.css";
 
 function App() {
   return (
-    <div className="App">
-      <Switch>
-        <Route exact path="/" component={Login} />
-        <Route exact path="/SignUp" component={Signup} />
-      </Switch>
-    </div>
+    <Router>
+      <>
+        <Switch>
+          <Route exact path="/" component={DashNav} />
+          <Route exact path="/login" component={Login} />
+          <Route exact path="/Signup" component={Signup} />
+          <Route exact path="/dashboard" component={Dashboard} />
+        </Switch>
+      </>
+    </Router>
   );
 }
 

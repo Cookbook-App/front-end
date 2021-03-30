@@ -104,19 +104,25 @@ export default function SignInSide() {
   const onSubmit = (e) => {
     e.preventDefault();
     // Call API TO SUBMIT DATA
+    const data = {
+      email: e.target.value,
+      password: e.target.value,
+    };
     axios
-      .post("", { email: e.target.value, password: e.target.value })
+      .post("https://localhost:3000/login", data)
       .then((res) => {
+        console.log(res.token);
         const { token } = res.data;
-        localStorage.setItem("token", token);
+        localStorage.setItem("token", res.token);
 
-        history.push("/");
+        history.push("/dashboard");
         history.go();
       })
       .catch((error) => {
         console.log(error, "Houston we have a problem");
       });
   };
+
   useEffect(() => {
     formSchema.isValid(credentials).then((valid) => setDisabled(!valid));
   }, [credentials]);
@@ -133,7 +139,7 @@ export default function SignInSide() {
           <Typography component="h1" variant="h5">
             Login
           </Typography>
-          <form className={classes.form} noValidate>
+          <form className={classes.form} noValidate onSubmit={onSubmit}>
             <TextField
               onChange={handleChange}
               variant="outlined"
